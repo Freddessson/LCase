@@ -16,7 +16,7 @@ include 'includes/GET/returnTotalSales.php';
 $jsonData = file_get_contents("data.json");
 $jsonData = json_decode($jsonData, true);
 
-
+//Listening for GET requests
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if ($_GET['url'] == "employees") {
         $data = returnAllEmployees($jsonData, $_GET['url']);
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     else{
         response_delivery(400, "Invalid Request", null);
     }
+    //Listening for POST requests
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($_GET['url'] == "carmodels") {
         $body = file_get_contents("php://input");
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
+//Response
 function response_delivery($status, $status_message, $data)
 {
     header("HTTP/1.1 $status $status_message");
@@ -66,6 +68,3 @@ function response_delivery($status, $status_message, $data)
     $json_response = json_encode($response);
     echo $json_response;
 }
-
-
-?>
