@@ -5,6 +5,7 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Credentials: true");
 header("Content-type: application/json; charset=utf-8");
 
+include 'includes/createCarInputCheck.php';
 include 'includes/createNewCarmodel.php';
 include 'includes/returnAllCars.php';
 include 'includes/returnAllEmployees.php';
@@ -23,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $data = returnAllCars($jsonData, $_GET['url']);
         response_delivery(200, "ok", $data);
     } else if ($_GET['url'] == "total_sales") {
-        //$data = totalSales($jsonData, "employees", "sales");
         $sales = returnAllSales($jsonData, "sales");
         $employees = returnAllEmployees($jsonData, "employees");
         $cars = returnAllCars($jsonData, "carmodels");
@@ -37,11 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if ($_GET['url'] == "carmodels") {
         $body = file_get_contents("php://input");
         $body = json_decode($body, true);
-        $body = createNewCarmodel($body);
-        response_delivery(200, "ok", $body);
+
+        $inputCheck = createCarInputCheck($body);
+        if($inputCheck){
+            $body = createNewCarmodel($body);
+            response_delivery(200, "ok", $body);
+        }else{
+            response_delivery(400, "Input not valid", $body);
+        }
     }
 }
-
 
 function response_delivery($status, $status_message, $data)
 {
