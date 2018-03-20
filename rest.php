@@ -5,12 +5,13 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Credentials: true");
 header("Content-type: application/json; charset=utf-8");
 
-include 'includes/createCarInputCheck.php';
-include 'includes/createNewCarmodel.php';
-include 'includes/returnAllCars.php';
-include 'includes/returnAllEmployees.php';
-include 'includes/returnAllSales.php';
-include 'includes/returnTotalSales.php';
+include 'includes/POST/carmodelsIdCheck.php';
+include 'includes/POST/createCarInputCheck.php';
+include 'includes/POST/createNewCarmodel.php';
+include 'includes/GET/returnAllCars.php';
+include 'includes/GET/returnAllEmployees.php';
+include 'includes/GET/returnAllSales.php';
+include 'includes/GET/returnTotalSales.php';
 
 $jsonData = file_get_contents("data.json");
 $jsonData = json_decode($jsonData, true);
@@ -39,11 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $body = json_decode($body, true);
 
         $inputCheck = createCarInputCheck($body);
-        if($inputCheck){
+        $carmodelList = returnAllCars($jsonData, "carmodels");
+        $idCheck = carmodelsIdCheck($body, $carmodelList);
+        if($inputCheck == false){
+            response_delivery(400, "Input not valid", $body);
+        }
+        else if($idCheck == false){
+            response_delivery(400, "Id alredy exists", $body);
+        }
+        else{
             $body = createNewCarmodel($body);
             response_delivery(200, "ok", $body);
-        }else{
-            response_delivery(400, "Input not valid", $body);
+
         }
     }
 }

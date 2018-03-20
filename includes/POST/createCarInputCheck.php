@@ -1,6 +1,6 @@
 <?php
 function createCarInputCheck($inputArray){
-    echo $id = $inputArray['id'];
+    $id = $inputArray['id'];
     $brand = $inputArray['brand'];
     $model = $inputArray['model'];
     $price = $inputArray['price'];

@@ -72,6 +72,18 @@
         "brand": "Tesla",
         "model": "ModelS",
         "price": 600000
+      },
+      {
+        "id": 103,
+        "brand": "Tesla",
+        "model": "ModelS",
+        "price": 600000
+      },
+      {
+        "id": 104,
+        "brand": "Suzuki",
+        "model": "Swift",
+        "price": 40000
       }
     ],
     "sales": [
