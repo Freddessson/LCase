@@ -84,6 +84,12 @@
         "brand": "Suzuki",
         "model": "Swift",
         "price": 40000
+      },
+      {
+        "id": 105,
+        "brand": "Volvo",
+        "model": "X30",
+        "price": 40000
       }
     ],
     "sales": [
