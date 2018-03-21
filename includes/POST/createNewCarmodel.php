@@ -25,7 +25,7 @@ function createNewCarmodel($inputArray)
     $jsonData = json_encode($jsonData);
     file_put_contents('data.json', $jsonData);
 
-    //Encode the new car and return
+    //Encode the new car and inform what has been created
     array_push($data, $row);
     json_encode($data);
     return $data;

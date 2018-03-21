@@ -6,7 +6,6 @@ function returnTotalSales($sales, $employees, $cars)
     $lengthOfSales = sizeof($sales);
     $lengthOfEmployees = sizeof($employees);
     $lengthOfCars = sizeof($cars);
-    //$sale = array();
     //Loop all employees
     for ($i = 0; $i < $lengthOfEmployees; $i++) {
         $name = $employees[$i]['name'];
@@ -14,7 +13,6 @@ function returnTotalSales($sales, $employees, $cars)
         $total_sale = 0;
         //Loop through Sales
         for ($j = 0; $j < $lengthOfSales; $j++) {
-
             $employee_id = $sales[$j]['employee_id'];
             $carmodel_id = $sales[$j]['carmodel_id'];
             //Copmare employee id with "employee_id" in sales to find what each employee sold.

@@ -21,10 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if ($_GET['url'] == "employees") {
         $data = returnAllEmployees($jsonData, $_GET['url']);
         response_delivery(200, "ok", $data);
-    } else if ($_GET['url'] == "carmodels") {
+    }
+    else if ($_GET['url'] == "carmodels") {
         $data = returnAllCars($jsonData, $_GET['url']);
         response_delivery(200, "ok", $data);
-    } else if ($_GET['url'] == "total_sales") {
+    }
+    else if ($_GET['url'] == "total_sales") {
         $sales = returnAllSales($jsonData, "sales");
         $employees = returnAllEmployees($jsonData, "employees");
         $cars = returnAllCars($jsonData, "carmodels");
@@ -52,12 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         else{
             $body = createNewCarmodel($body);
             response_delivery(200, "ok", $body);
-
         }
     }
 }
 
-//Response
 function response_delivery($status, $status_message, $data)
 {
     header("HTTP/1.1 $status $status_message");
